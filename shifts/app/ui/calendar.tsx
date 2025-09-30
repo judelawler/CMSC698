@@ -16,6 +16,7 @@ export default function Calendar() {
         {name: "Red", id: "#cc4125"},
         {name: "Light Red", id: "#ff0000"},
         {name: "Purple", id: "#af8ee5"},
+        {name: "Light Grey", id: "#D3D3D3"}
     ];
 
 
