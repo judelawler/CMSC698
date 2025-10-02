@@ -2,10 +2,10 @@
 
 import React, { useEffect, useState} from "react";
 import {DayPilot, DayPilotCalendar} from "@daypilot/daypilot-lite-react";
-import { Shift, fetchShifts } from '@/app/lib/data'
+import { Shift, fetchShifts } from '@/app/lib/data' //maybe can't be in use client file?
 
 export default function Calendar() {
-
+    const [shiftslist, setShiftslist] = useState([]);
     
     const colors = [
         {name: "Green", id: "#6aa84f"},
@@ -34,10 +34,13 @@ export default function Calendar() {
 
     const [config, setConfig] = useState(initialConfig);
 
+    
+
     useEffect(() => {
         if (!calendar || calendar?.disposed()) {
             return;
         }
+        
         const events: DayPilot.EventData[] = [
             { // these two are test events to see the calendar
                 id: 6,
@@ -69,7 +72,9 @@ export default function Calendar() {
             }
         ];
 
-        const startDate = "2025-10-01";
+        
+
+        const startDate = "2025-10-02";
 
         calendar.update({startDate, events});
     }, [calendar]);
