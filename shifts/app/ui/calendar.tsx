@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState} from "react";
 import {DayPilot, DayPilotCalendar} from "@daypilot/daypilot-lite-react";
+import { Shift, fetchShifts } from '@/app/lib/data'
 
 export default function Calendar() {
 

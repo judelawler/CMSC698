@@ -24,3 +24,20 @@ export interface User extends RowDataPacket {
     email: string;
     isadmin: string;
 }
+
+const conn = await mysql.createConnection(access);
+
+export async function fetchShifts() : Promise<Shift[]> {
+    const query = 'SELECT * from shifts;';
+    const [shifts] = await conn.query<Shift[]>(query);
+    return shifts;
+}
+
+export async function fetchShift(id : string) : Promise<Shift> {
+    const query = 'SELECT * from shifts WHERE idshifts=?';
+    const values = [id];
+    const [shifts] = await conn.query<Shift[]>(query,values);
+    if(shifts.length == 0)
+        throw Error("Invalid shift id.");
+    return shifts[0];
+}
