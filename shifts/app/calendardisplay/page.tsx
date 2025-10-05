@@ -9,7 +9,10 @@ export default async function Page() {
     
     return (
         <div>
-            <Calendar/>
+            <h3>CALENDAR PAGE</h3>
+            <Calendar
+                
+            />
         </div>
     )
 }

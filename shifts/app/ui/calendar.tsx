@@ -34,7 +34,37 @@ export default function Calendar() {
 
     const [config, setConfig] = useState(initialConfig);
 
-    
+    const onBeforeEventRendersDayWeek = (args: DayPilot.CalendarBeforeEventRenderArgs) => {
+        const eventColor = args.data.tags?.color || '#af8ee5';
+        args.data.backColor = eventColor + "dd";
+        args.data.borderColor = "darker";
+        args.data.html = "";
+        const assigned = args.data.tags?.assigned || "Unassigned";
+        args.data.areas = [
+            {
+                id: "title",
+                top: 5,
+                left: 10,
+                right: 50,
+                height: 20,
+                text: args.data.text,
+                fontColor: "#000000",
+                style: "font-weight: bold; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+            },
+            {
+                id: "assigned",
+                bottom: 5,
+                left: 10,
+                right: 5,
+                height: 20,
+                borderRadius: "4px",
+                backColor: DayPilot.ColorUtil.darker(eventColor),
+                fontColor: "#000000",
+                text: assigned,
+                style: "font-size: 12px; text-align: center; line-height: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+            }
+        ];
+    }
 
     useEffect(() => {
         if (!calendar || calendar?.disposed()) {
@@ -49,6 +79,7 @@ export default function Calendar() {
                 end: "2025-10-02T13:00:00",
                 tags: {
                     participants: 2,
+                    assigned: "Jude"
                 }
             },
 
@@ -65,7 +96,7 @@ export default function Calendar() {
                 id: 435,
                 text: "Past Event",
                 start: "2025-10-01T04:30:00",
-                end: "2025-10-01T05:00:00",
+                end: "2025-10-01T05:30:00",
                 tags: {
                     participants: 1,
                 }
@@ -84,6 +115,7 @@ export default function Calendar() {
             <DayPilotCalendar
                 {...config}
                 controlRef={setCalendar}
+                onBeforeEventRender={onBeforeEventRendersDayWeek}
                 />
         </div>
     )
