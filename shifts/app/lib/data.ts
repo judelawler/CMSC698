@@ -11,11 +11,13 @@ const access: ConnectionOptions = {
 };
 
 export interface Shift extends RowDataPacket {
-    idshifts: string;
+    id: string;
     name: string;
     start: string;
     end: string;
-    worker: string;
+    color: string;
+    user: string;
+    text: string;
 }
 
 export interface User extends RowDataPacket {
@@ -34,7 +36,7 @@ export async function fetchShifts() : Promise<Shift[]> {
 }
 
 export async function fetchShift(id : string) : Promise<Shift> {
-    const query = 'SELECT * from shifts WHERE idshifts=?';
+    const query = 'SELECT * from shifts WHERE id=?';
     const values = [id];
     const [shifts] = await conn.query<Shift[]>(query,values);
     if(shifts.length == 0)

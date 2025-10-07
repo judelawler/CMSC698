@@ -4,9 +4,10 @@ import React, { useEffect, useState} from "react";
 import {DayPilot, DayPilotCalendar} from "@daypilot/daypilot-lite-react";
 import { Shift, fetchShifts } from '@/app/lib/data' //maybe can't be in use client file?
 
-export default function Calendar() {
+export default function Calendar(eventlist: Shift[]) {
     const [shiftslist, setShiftslist] = useState([]);
-    
+
+
     const colors = [
         {name: "Green", id: "#6aa84f"},
         {name: "Blue", id: "#3d85c6"},
@@ -71,41 +72,17 @@ export default function Calendar() {
             return;
         }
         
-        const events: DayPilot.EventData[] = [
-            { // these two are test events to see the calendar
-                id: 6,
-                text: "Nothing",
-                start: "2025-10-02T10:30:00",
-                end: "2025-10-02T13:00:00",
-                tags: {
-                    participants: 2,
-                    assigned: "Jude"
-                }
-            },
+        const eventArray = Object.values(eventlist);
 
-            {
-                id: 29,
-                text: "Nothing Again",
-                start: "2025-10-02T14:30:00",
-                end: "2025-10-02T15:30:00",
-                tags: {
-                    participants: 3,
-                }
-            },
-            {
-                id: 435,
-                text: "Past Event",
-                start: "2025-10-01T04:30:00",
-                end: "2025-10-01T05:30:00",
-                tags: {
-                    participants: 1,
-                }
-            }
-        ];
+
+        const events: DayPilot.EventData[] = eventArray;
+
+        console.log(events);    //this is to check that the site is receiving the correct data
+        console.log(events[0]);
+
+        const startDate = "2025-10-01";
 
         
-
-        const startDate = "2025-10-02";
 
         calendar.update({startDate, events});
     }, [calendar]);
