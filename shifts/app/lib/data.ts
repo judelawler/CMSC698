@@ -12,12 +12,12 @@ const access: ConnectionOptions = {
 
 export interface Shift extends RowDataPacket {
     id: string;
-    name: string;
+    text: string;
     start: string;
     end: string;
     color: string;
     user: string;
-    text: string;
+    //text: string;
 }
 
 export interface User extends RowDataPacket {

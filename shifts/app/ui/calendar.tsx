@@ -31,6 +31,7 @@ export default function Calendar(eventlist: Shift[]) {
         eventResizeHandling: "Disabled",
         eventDeleteHandling: "Disabled",
         
+        
     };
 
     const [config, setConfig] = useState(initialConfig);
@@ -41,9 +42,10 @@ export default function Calendar(eventlist: Shift[]) {
         args.data.borderColor = "darker";
         args.data.html = "";
         const assigned = args.data.tags?.assigned || "Unassigned";
+
         args.data.areas = [
             {
-                id: "title",
+                id: "text",
                 top: 5,
                 left: 10,
                 right: 50,
