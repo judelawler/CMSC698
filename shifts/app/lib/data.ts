@@ -1,5 +1,5 @@
 import mysql, { ConnectionOptions, RowDataPacket } from 'mysql2/promise';
-
+import { DayPilot } from '@daypilot/daypilot-lite-react';
 
 
 const access: ConnectionOptions = {
@@ -13,11 +13,13 @@ const access: ConnectionOptions = {
 export interface Shift extends RowDataPacket {
     id: string;
     text: string;
-    start: string;
-    end: string;
+    start: any;
+    end: any;
     color: string;
-    user: string;
-    //text: string;
+    //user: string;
+    tags: {
+        user: string;
+    }
 }
 
 export interface User extends RowDataPacket {

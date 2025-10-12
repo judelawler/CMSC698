@@ -30,6 +30,7 @@ export default function Calendar(eventlist: Shift[]) {
         eventMoveHandling: "Disabled",
         eventResizeHandling: "Disabled",
         eventDeleteHandling: "Disabled",
+        timeFormat: "Clock12Hours",
         
         
     };
@@ -42,6 +43,10 @@ export default function Calendar(eventlist: Shift[]) {
         args.data.borderColor = "darker";
         args.data.html = "";
         const assigned = args.data.tags?.assigned || "Unassigned";
+
+        if (assigned == 0) {
+            //This is where I can define shifts that need assignments
+        }   // I could also make something similar with the user id?
 
         args.data.areas = [
             {
@@ -74,7 +79,11 @@ export default function Calendar(eventlist: Shift[]) {
             return;
         }
         
+        
+
+
         const eventArray = Object.values(eventlist);
+
 
 
         const events: DayPilot.EventData[] = eventArray;
