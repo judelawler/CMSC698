@@ -1,4 +1,5 @@
 import Login from '@/app/ui/login';
+import { redirect } from 'next/navigation';
 
 export default async function Page() {
     async function handleLogin(formData: FormData){
@@ -8,13 +9,13 @@ export default async function Page() {
         
 
 
-
-
-
-        return (
-            <div>
-                <Login adder={handleLogin} />
-            </div>
-        )
+        redirect('/calendardisplay/');
     }
+
+    return (
+        <div>
+            <Login adder={handleLogin} />
+        </div>
+    )
+    
 }

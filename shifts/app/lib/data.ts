@@ -2,6 +2,7 @@ import mysql, { ConnectionOptions, RowDataPacket } from 'mysql2/promise';
 import { DayPilot } from '@daypilot/daypilot-lite-react';
 
 
+
 const access: ConnectionOptions = {
     host: 'localhost',
     port: 3306,
@@ -24,9 +25,10 @@ export interface Shift extends RowDataPacket {
 
 export interface User extends RowDataPacket {
     idusers: string;
+    username: string;
+    password: string;
     name: string;
     email: string;
-    isadmin: string;
 }
 
 const conn = await mysql.createConnection(access);
@@ -44,4 +46,17 @@ export async function fetchShift(id : string) : Promise<Shift> {
     if(shifts.length == 0)
         throw Error("Invalid shift id.");
     return shifts[0];
+}
+
+export async function addShift(text:string,start:any,end:any) {
+    const sql = 'INSERT INTO shifts(text,start,end) VALUES (?,?,?)';
+    const values = [text,start,end];
+
+    await conn.execute(sql,values);
+}
+
+export async function addShifts(shifts:Shift[]) {
+    for (var i of shifts) {
+        await addShift(i.text,i.start,i.end);
+    }
 }

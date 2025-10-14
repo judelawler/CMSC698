@@ -2,28 +2,17 @@
 
 import React, { useEffect, useState} from "react";
 import {DayPilot, DayPilotCalendar} from "@daypilot/daypilot-lite-react";
-import { Shift, fetchShifts } from '@/app/lib/data' //maybe can't be in use client file?
+import { Shift, fetchShifts, addShifts } from '@/app/lib/data' //maybe can't be in use client file?
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+
 
 export default function Calendar(eventlist: Shift[]) {
-    const [shiftslist, setShiftslist] = useState([]);
-
-
-    const colors = [
-        {name: "Green", id: "#6aa84f"},
-        {name: "Blue", id: "#3d85c6"},
-        {name: "Turquoise", id: "#00aba9"},
-        {name: "Light Blue", id: "#56c5ff"},
-        {name: "Yellow", id: "#f1c232"},
-        {name: "Orange", id: "#e69138"},
-        {name: "Red", id: "#cc4125"},
-        {name: "Light Red", id: "#ff0000"},
-        {name: "Purple", id: "#af8ee5"},
-        {name: "Light Grey", id: "#D3D3D3"}
-    ];
-
 
     const [calendar, setCalendar] = useState<DayPilot.Calendar>();
+    const [newShifts, setNewShifts] = useState<Shift>();
     
+
     const initialConfig: DayPilot.CalendarConfig = {
         viewType: "Week",
         locale: "en-us",
@@ -31,8 +20,6 @@ export default function Calendar(eventlist: Shift[]) {
         eventResizeHandling: "Disabled",
         eventDeleteHandling: "Disabled",
         timeFormat: "Clock12Hours",
-        
-        
     };
 
     const [config, setConfig] = useState(initialConfig);
@@ -78,13 +65,8 @@ export default function Calendar(eventlist: Shift[]) {
         if (!calendar || calendar?.disposed()) {
             return;
         }
-        
-        
-
 
         const eventArray = Object.values(eventlist);
-
-
 
         const events: DayPilot.EventData[] = eventArray;
 
@@ -93,17 +75,37 @@ export default function Calendar(eventlist: Shift[]) {
 
         const startDate = "2025-10-01";
 
-        
-
         calendar.update({startDate, events});
     }, [calendar]);
 
-    return (
+    const onTimeRangeSelected = async (args: DayPilot.CalendarTimeRangeSelectedArgs) => {
+        const modal = await DayPilot.Modal.prompt("Create a new shift:", "Shift 1");
+        calendar?.clearSelection();
+        if (modal.canceled) {
+            return;
+        }
+        console.log("modal.result", modal.result, calendar);
+
+        const newShift = { // how do I add this to the SQL database?
+            text: modal.result,
+            start: args.start,
+            end: args.end,
+        }
+        
+        console.log(modal.result);
+        console.log(args.start);
+        console.log(args.end);
+        //addShift(modal.result,args.start,args.end); This will not work
+    };
+
+    return ( // button is not functional atm
         <div>
+            <button onClick={async () => {}}>Test</button>
             <DayPilotCalendar
                 {...config}
                 controlRef={setCalendar}
                 onBeforeEventRender={onBeforeEventRendersDayWeek}
+                onTimeRangeSelected={onTimeRangeSelected}
                 />
         </div>
     )
