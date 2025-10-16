@@ -3,14 +3,15 @@
 import React, { useEffect, useState} from "react";
 import {DayPilot, DayPilotCalendar} from "@daypilot/daypilot-lite-react";
 import { Shift, fetchShifts, addShifts } from '@/app/lib/data' //maybe can't be in use client file?
-import { cookies } from 'next/headers';
+//import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 
 export default function Calendar(eventlist: Shift[]) {
-
+    const eventArray = Object.values(eventlist);
     const [calendar, setCalendar] = useState<DayPilot.Calendar>();
-    const [newShifts, setNewShifts] = useState<Shift>();
+    //const [shifts, setShifts] = useState<DayPilot.EventData[]>([]);
+    
     
 
     const initialConfig: DayPilot.CalendarConfig = {
@@ -30,6 +31,10 @@ export default function Calendar(eventlist: Shift[]) {
         args.data.borderColor = "darker";
         args.data.html = "";
         const assigned = args.data.tags?.assigned || "Unassigned";
+        const argUserId = args.data.text;
+        
+
+
 
         if (assigned == 0) {
             //This is where I can define shifts that need assignments
@@ -66,10 +71,10 @@ export default function Calendar(eventlist: Shift[]) {
             return;
         }
 
-        const eventArray = Object.values(eventlist);
+        
 
         const events: DayPilot.EventData[] = eventArray;
-
+        // vvv this is old stuff, checking the shift data.
         console.log(events);    //this is to check that the site is receiving the correct data
         console.log(events[0]);
 

@@ -2,7 +2,7 @@
 import { redirect } from 'next/navigation';
 
 export default function Home() {
-  redirect('/calendardisplay');
+  redirect('/login');
   return (
     <div className="p-8">
       <h3 className="font-bold">Error</h3>
