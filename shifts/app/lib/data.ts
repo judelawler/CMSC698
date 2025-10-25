@@ -18,9 +18,8 @@ export interface Shift extends RowDataPacket {
     end: any;
     color: string;
     //user: string;
-    tags: {
-        user: string;
-    }
+    tags: any;
+    userid: string;
 }
 
 export interface User extends RowDataPacket {
@@ -36,6 +35,21 @@ const conn = await mysql.createConnection(access);
 export async function fetchShifts() : Promise<Shift[]> {
     const query = 'SELECT * from shifts;';
     const [shifts] = await conn.query<Shift[]>(query);
+    return shifts;
+}
+
+export async function fetchShiftsById(userid:string) : Promise<Shift[]> {
+    const query = 'SELECT * from shifts;';
+    const [shifts] = await conn.query<Shift[]>(query);
+
+    for(const thing of shifts){
+        if(thing.userid == userid) {
+            thing.tags = 1;
+        } if(thing.userid == null){
+            thing.tags = 0;
+        }
+    }
+
     return shifts;
 }
 

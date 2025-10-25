@@ -26,32 +26,37 @@ export default function Calendar(eventlist: Shift[]) {
     const [config, setConfig] = useState(initialConfig);
 
     const onBeforeEventRendersDayWeek = (args: DayPilot.CalendarBeforeEventRenderArgs) => {
-        const eventColor = args.data.tags?.color || '#af8ee5';
+        const eventColor = args.data.tags?.color || '#a6cbe9';
         args.data.backColor = eventColor + "dd";
         args.data.borderColor = "darker";
         args.data.html = "";
-        const assigned = args.data.tags?.assigned || "Unassigned";
-        const argUserId = args.data.text;
+        const assigned = args.data.tags;
+        //const timeRange = args.data.start +""+args.data.end;
         
-
-
-
         if (assigned == 0) {
-            //This is where I can define shifts that need assignments
-        }   // I could also make something similar with the user id?
+            args.data.backColor = '#da83ffdd';
+            args.data.borderColor = "darker";
+            args.data.html = "";
+        }
+        if (assigned == 1) {
+            args.data.backColor = '#92fc6edd';
+            args.data.borderColor = "darker";
+            args.data.html = "";
+        } 
+
 
         args.data.areas = [
             {
                 id: "text",
-                top: 5,
+                top: 15,
                 left: 10,
-                right: 50,
-                height: 20,
+                right: 10,
+                height: 45,
                 text: args.data.text,
                 fontColor: "#000000",
-                style: "font-weight: bold; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                style: "font-weight: bold; font-size: 20px; white-space: nowrap; overflow: hidden; text-overflow: clip;"
             },
-            {
+            /*{
                 id: "assigned",
                 bottom: 5,
                 left: 10,
@@ -60,9 +65,9 @@ export default function Calendar(eventlist: Shift[]) {
                 borderRadius: "4px",
                 backColor: DayPilot.ColorUtil.darker(eventColor),
                 fontColor: "#000000",
-                text: assigned,
+                text: timeRange,
                 style: "font-size: 12px; text-align: center; line-height: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
-            }
+            }*/
         ];
     }
 
@@ -77,31 +82,32 @@ export default function Calendar(eventlist: Shift[]) {
         // vvv this is old stuff, checking the shift data.
         console.log(events);    //this is to check that the site is receiving the correct data
         console.log(events[0]);
+        console.log(events[1]);
+
+
 
         const startDate = "2025-10-01";
 
         calendar.update({startDate, events});
     }, [calendar]);
 
-    const onTimeRangeSelected = async (args: DayPilot.CalendarTimeRangeSelectedArgs) => {
+/*    const onTimeRangeSelected = async (args: DayPilot.CalendarTimeRangeSelectedArgs) => {
         const modal = await DayPilot.Modal.prompt("Create a new shift:", "Shift 1");
         calendar?.clearSelection();
         if (modal.canceled) {
             return;
         }
         console.log("modal.result", modal.result, calendar);
-
         const newShift = { // how do I add this to the SQL database?
             text: modal.result,
             start: args.start,
             end: args.end,
         }
-        
         console.log(modal.result);
         console.log(args.start);
         console.log(args.end);
         //addShift(modal.result,args.start,args.end); This will not work
-    };
+    };*/
 
     return ( // button is not functional atm
         <div>
@@ -110,7 +116,6 @@ export default function Calendar(eventlist: Shift[]) {
                 {...config}
                 controlRef={setCalendar}
                 onBeforeEventRender={onBeforeEventRendersDayWeek}
-                onTimeRangeSelected={onTimeRangeSelected}
                 />
         </div>
     )

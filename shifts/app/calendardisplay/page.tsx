@@ -2,7 +2,7 @@ import Calendar from '@/app/ui/calendar';
 import Loading from '@/app/ui/loading';
 import { Suspense } from 'react';
 import {DayPilot} from '@daypilot/daypilot-lite-react';
-import { Shift, fetchShifts, getUser } from '@/app/lib/data'
+import { Shift, fetchShifts, fetchShiftsById, getUser } from '@/app/lib/data'
 import Link from 'next/link';
 import { cookies } from 'next/headers';
 
@@ -10,7 +10,10 @@ import { cookies } from 'next/headers';
 export default async function Page() {
     const userId = (await cookies()).get('userId')?.value?? "";
     const currentUser = getUser(userId);
-    const events = await fetchShifts();
+    console.log(userId);
+    const events = await fetchShiftsById(userId);
+
+
 
     // possibility: May have to make calendar un-interactable, just visual; all database interactions outside it?
     return (
@@ -19,7 +22,6 @@ export default async function Page() {
             <Suspense fallback={<Loading/>}>
             <Calendar 
                 {...events}
-              
             />
             </Suspense>
         </div>
