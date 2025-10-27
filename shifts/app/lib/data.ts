@@ -49,7 +49,6 @@ export async function fetchShiftsById(userid:string) : Promise<Shift[]> {
             thing.tags = 0;
         }
     }
-
     return shifts;
 }
 

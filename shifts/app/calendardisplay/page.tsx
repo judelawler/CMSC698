@@ -9,13 +9,10 @@ import { cookies } from 'next/headers';
 
 export default async function Page() {
     const userId = (await cookies()).get('userId')?.value?? "";
-    const currentUser = getUser(userId);
+    //const currentUser = getUser(userId);
     console.log(userId);
     const events = await fetchShiftsById(userId);
 
-
-
-    // possibility: May have to make calendar un-interactable, just visual; all database interactions outside it?
     return (
         <div>
             <h3>CALENDAR PAGE</h3>
