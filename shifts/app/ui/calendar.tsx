@@ -1,14 +1,19 @@
 'use client'
 
 import React, { useEffect, useState} from "react";
-import {DayPilot, DayPilotCalendar} from "@daypilot/daypilot-lite-react";
+import {DayPilot, DayPilotCalendar, DayPilotNavigator} from "@daypilot/daypilot-lite-react";
 import { Shift, fetchShifts, addShifts } from '@/app/lib/data'
-import { redirect } from 'next/navigation';
+//import { redirect } from 'next/navigation';
 
+type ViewType = "Day" | "Week" | "Month";
 
 export default function Calendar(eventlist: Shift[]) {
     const eventArray = Object.values(eventlist);
-    const [calendar, setCalendar] = useState<DayPilot.Calendar>();
+    //const [calendar, setCalendar] = useState<DayPilot.Calendar>();
+    const [view, setView] = useState<ViewType>("Week");
+    type AnyCalendar = DayPilot.Calendar | DayPilot.Month;
+    const [startDate, setStartDate] = useState<DayPilot.Date>(DayPilot.Date.today());
+    const [events, setEvents] = useState<DayPilot.EventData[]>([]);
 
     const initialConfig: DayPilot.CalendarConfig = {
         viewType: "Week",
@@ -53,31 +58,45 @@ export default function Calendar(eventlist: Shift[]) {
         ];
     }
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (!calendar || calendar?.disposed()) {
             return;
         }
-
-        const events: DayPilot.EventData[] = eventArray;
+        setEvents(eventArray);
+        //const events: DayPilot.EventData[] = eventArray;
         // vvv this is old stuff, checking the shift data.
         console.log(events);    //this is to check that the site is receiving the correct data
         console.log(events[0]);
         console.log(events[1]);
 
-        const startDate = "2025-10-01";
-
         calendar.update({startDate, events});
-    }, [calendar]);
+    }, [calendar]);*/
 
-    // maybe add navigator for weeks?
+    useEffect(() => {
+        setEvents(eventArray);
+    }, []);
+
+
 
     return (
         <div>
-            <DayPilotCalendar
-                {...config}
-                controlRef={setCalendar}
-                onBeforeEventRender={onBeforeEventRendersDayWeek}
+            <div className={"navigator"}>
+                <DayPilotNavigator
+                    selectMode={view}
+                    onTimeRangeSelected={args => setStartDate(args.day)}
+                    events={events}
                 />
+            </div>
+            <div className={"content"}>
+                <DayPilotCalendar
+                    viewType={"Week"}
+                    startDate={startDate}
+                    events={events}
+                    visible={view === "Week"}
+                    durationBarVisible={false}
+                    onBeforeEventRender={onBeforeEventRendersDayWeek}
+                />
+            </div>
         </div>
     )
 }
