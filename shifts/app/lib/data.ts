@@ -52,6 +52,12 @@ export async function fetchShiftsById(userid:string) : Promise<Shift[]> {
     return shifts;
 }
 
+export async function fetchAvailableShifts() : Promise<Shift[]> {
+    const query = 'SELECT * from shifts WHERE userid IS NULL';
+    const [shifts] = await conn.query<Shift[]>(query);
+    return shifts;
+}
+
 export async function fetchShift(id : string) : Promise<Shift> {
     const query = 'SELECT * from shifts WHERE id=?';
     const values = [id];
@@ -92,3 +98,4 @@ export async function getUser(idusers: string) : Promise<User> {
         throw Error("Invalid user id.");
     return users[0];
 }
+

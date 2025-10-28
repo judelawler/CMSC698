@@ -3,7 +3,8 @@
 import React, { useEffect, useState} from "react";
 import {DayPilot, DayPilotCalendar, DayPilotNavigator} from "@daypilot/daypilot-lite-react";
 import { Shift, fetchShifts, addShifts } from '@/app/lib/data'
-//import { redirect } from 'next/navigation';
+import { redirect } from 'next/navigation';
+import "./calendar.css"
 
 type ViewType = "Day" | "Week" | "Month";
 
@@ -22,6 +23,7 @@ export default function Calendar(eventlist: Shift[]) {
         eventResizeHandling: "Disabled",
         eventDeleteHandling: "Disabled",
         timeFormat: "Clock12Hours",
+        heightSpec: "BusinessHours",
     };
 
     const [config, setConfig] = useState(initialConfig);
@@ -58,25 +60,14 @@ export default function Calendar(eventlist: Shift[]) {
         ];
     }
 
-    /*useEffect(() => {
-        if (!calendar || calendar?.disposed()) {
-            return;
-        }
-        setEvents(eventArray);
-        //const events: DayPilot.EventData[] = eventArray;
-        // vvv this is old stuff, checking the shift data.
-        console.log(events);    //this is to check that the site is receiving the correct data
-        console.log(events[0]);
-        console.log(events[1]);
-
-        calendar.update({startDate, events});
-    }, [calendar]);*/
+    /*const editEvent = async (e: DayPilot.Event) => {
+        redirect(`/edit/${e.id}`);
+    }*/
 
     useEffect(() => {
         setEvents(eventArray);
+        console.log(events[0]);
     }, []);
-
-
 
     return (
         <div>
@@ -89,6 +80,7 @@ export default function Calendar(eventlist: Shift[]) {
             </div>
             <div className={"content"}>
                 <DayPilotCalendar
+                    {...config}
                     viewType={"Week"}
                     startDate={startDate}
                     events={events}
