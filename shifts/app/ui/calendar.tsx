@@ -5,6 +5,7 @@ import {DayPilot, DayPilotCalendar, DayPilotNavigator} from "@daypilot/daypilot-
 import { Shift, fetchShifts, addShifts } from '@/app/lib/data'
 import { redirect } from 'next/navigation';
 import "./calendar.css"
+import styles from '../styles/Design.module.css';
 
 type ViewType = "Day" | "Week" | "Month";
 
@@ -70,7 +71,7 @@ export default function Calendar(eventlist: Shift[]) {
     }, []);
 
     return (
-        <div>
+        <div className={styles.largerdiv}>
             <div className={"navigator"}>
                 <DayPilotNavigator
                     selectMode={view}
@@ -78,7 +79,7 @@ export default function Calendar(eventlist: Shift[]) {
                     events={events}
                 />
             </div>
-            <div className={"content"}>
+            <div className={styles.container}>
                 <DayPilotCalendar
                     {...config}
                     viewType={"Week"}

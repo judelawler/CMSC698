@@ -1,0 +1,13 @@
+.largerdiv {
+    width: 100%;
+    border: 1px;
+    overflow: hidden;
+}
+
+
+
+.container {
+    width: 80%;
+    padding: 10px;
+    float:right;
+}
