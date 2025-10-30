@@ -17,6 +17,7 @@ export default async function Page() {
 
     return (
         <div>
+            <h3>Login Page :P</h3>
             <Login adder={handleLogin} />
         </div>
     )

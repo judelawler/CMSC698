@@ -4,10 +4,15 @@
     overflow: hidden;
 }
 
-
-
-.container {
-    width: 80%;
-    padding: 10px;
+.calendardiv {
+    width: 85%;
+    padding: 20px;
     float:right;
+    max-height: 700px;
+}
+
+.navigatordiv {
+    width: 15%;
+    padding: 20px;
+    float:left;
 }

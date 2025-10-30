@@ -72,14 +72,14 @@ export default function Calendar(eventlist: Shift[]) {
 
     return (
         <div className={styles.largerdiv}>
-            <div className={"navigator"}>
+            <div className={styles.navigatordiv}>
                 <DayPilotNavigator
                     selectMode={view}
                     onTimeRangeSelected={args => setStartDate(args.day)}
                     events={events}
                 />
             </div>
-            <div className={styles.container}>
+            <div className={styles.calendardiv}>
                 <DayPilotCalendar
                     {...config}
                     viewType={"Week"}
