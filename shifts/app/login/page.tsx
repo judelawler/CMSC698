@@ -2,6 +2,7 @@ import Login from '@/app/ui/login';
 import { redirect } from 'next/navigation';
 import { User, userLogin } from '@/app/lib/data';
 import { cookies } from 'next/headers';
+import styles from '../styles/Design.module.css';
 
 export default async function Page() {
     async function handleLogin(formData: FormData){
@@ -16,7 +17,7 @@ export default async function Page() {
     }
 
     return (
-        <div>
+        <div className={styles.centereddiv}>
             <h3>Login Page :P</h3>
             <Login adder={handleLogin} />
         </div>

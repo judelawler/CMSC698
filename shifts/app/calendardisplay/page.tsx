@@ -20,8 +20,10 @@ export default async function Page() {
                     {...events}
                 />
             </Suspense>
-            <input aria-label="Time" type="time" />
-            <input aria-label="Date" type="date" />
+            <div>
+                <input aria-label="Time" type="time" />
+                <input aria-label="Date" type="date" />
+            </div>
         </div>
     )
 }
