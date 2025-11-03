@@ -4,6 +4,18 @@
     overflow: hidden;
 }
 
+.choosedatediv {
+    width: 50%;
+    padding: 20px;
+    float:left;
+}
+
+.choosetimediv {
+    width: 50%;
+    padding: 20px;
+    float:right;
+}
+
 .calendardiv {
     width: 80%;
     padding: 20px;
@@ -19,7 +31,7 @@
 
 @media screen and (max-width: 1100px) {
     .navigatordiv {
-        float:none
+        float:none;
     }
     .calendardiv {
         float:none;

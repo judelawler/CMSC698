@@ -13,7 +13,11 @@ export default async function Page() {
         const userId = user.idusers;
         console.log("User ID is: "+userId);
         (await cookies()).set('userId',userId);
-        redirect('/calendardisplay/');
+        if(user.isadmin == 0) {
+            redirect('/calendardisplay/');
+        } else {
+            redirect('/admindisplay/');
+        }
     }
 
     return (

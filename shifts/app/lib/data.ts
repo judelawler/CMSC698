@@ -28,6 +28,7 @@ export interface User extends RowDataPacket {
     password: string;
     name: string;
     email: string;
+    isadmin: any;
 }
 
 const conn = await mysql.createConnection(access);
