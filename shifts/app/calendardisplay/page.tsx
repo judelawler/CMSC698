@@ -26,7 +26,7 @@ export default async function Page() {
                     <p>Test Text - Date Choice: </p>
                     <input aria-label="Date" type="date" />
                 </div>
-                <div className={styles.choosetimediv}>
+                <div>
                     <p>This time selector will only be on admin page.</p>
                     <input aria-label="Time" type="time" />
                 </div>
