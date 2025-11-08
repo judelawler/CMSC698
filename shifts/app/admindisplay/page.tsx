@@ -18,6 +18,8 @@ export default async function Page() {
     console.log(userId);
     const events = await fetchShiftsById(userId);
     const availableEvents = await fetchAvailableShifts();
+    
+    
 
     async function handleAdd(formData: FormData){
         'use server'
@@ -40,6 +42,11 @@ export default async function Page() {
         redirect('/admindisplay/');
     }
 
+    async function handleDateChange() {
+        'use server'
+        
+    }
+
 
     return (
         <div>
@@ -49,6 +56,10 @@ export default async function Page() {
                     {...events}
                 />
             </Suspense>
+            <div className={styles.editshiftdiv}>
+                <h3>Select Shifts</h3>
+                <p>Date: <input aria-label="Date" type="date" name="dateselect" onInput={handleDateChange}/></p>
+            </div>
             <div className={styles.addshiftdiv}>
                 <h3>Add Shifts</h3>
                 <p>Leave both times blank to fill a day with shifts automatically.</p>

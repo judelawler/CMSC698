@@ -10,6 +10,12 @@
     float:left;
 }
 
+.editshiftdiv {
+    width: 50%;
+    padding: 20px;
+    float:left;
+}
+
 .addshiftdiv {
     width: 50%;
     padding: 20px;
