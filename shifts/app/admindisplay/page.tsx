@@ -1,6 +1,7 @@
 import Calendar from '@/app/ui/calendar';
 import Loading from '@/app/ui/loading';
 import ShiftAdder from '@/app/ui/shiftadder';
+import ShiftEditor from '@/app/ui/shifteditor';
 import { Suspense } from 'react';
 import { fetchShiftsById, fetchAvailableShifts, addShift } from '@/app/lib/data'
 import { cookies } from 'next/headers';
@@ -42,9 +43,8 @@ export default async function Page() {
         redirect('/admindisplay/');
     }
 
-    async function handleDateChange() {
+    async function handleEdit(formData: FormData) {
         'use server'
-        
     }
 
 
@@ -58,7 +58,6 @@ export default async function Page() {
             </Suspense>
             <div className={styles.editshiftdiv}>
                 <h3>Select Shifts</h3>
-                <p>Date: <input aria-label="Date" type="date" name="dateselect" onInput={handleDateChange}/></p>
             </div>
             <div className={styles.addshiftdiv}>
                 <h3>Add Shifts</h3>
