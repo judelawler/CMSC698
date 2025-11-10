@@ -19,6 +19,7 @@ export default async function Page() {
     console.log(userId);
     const events = await fetchShiftsById(userId);
     const availableEvents = await fetchAvailableShifts();
+    const availEventArray = Object.values(availableEvents);
     
     
 
@@ -58,6 +59,8 @@ export default async function Page() {
             </Suspense>
             <div className={styles.editshiftdiv}>
                 <h3>Select Shifts</h3>
+                
+                <ShiftEditor adder={handleEdit} params={availEventArray}/>
             </div>
             <div className={styles.addshiftdiv}>
                 <h3>Add Shifts</h3>

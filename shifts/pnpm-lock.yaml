@@ -11,6 +11,9 @@ importers:
       '@daypilot/daypilot-lite-react':
         specifier: ^4.6.1
         version: 4.6.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@syncfusion/ej2-react-dropdowns':
+        specifier: ^31.2.5
+        version: 31.2.5
       bootstrap:
         specifier: ^5.3.8
         version: 5.3.8(@popperjs/core@2.11.8)
@@ -263,6 +266,46 @@ packages:
 
   '@swc/helpers@0.5.15':
     resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
+
+  '@syncfusion/ej2-base@31.2.5':
+    resolution: {integrity: sha512-irE/xASivfvKxrXLPyC7QRXVSxnwqPHnImnpEAK+7we1SOXlF5nChbYjQwLFUPo9BGk9blHMvP8G1vBKzRL18Q==}
+    hasBin: true
+
+  '@syncfusion/ej2-buttons@31.2.3':
+    resolution: {integrity: sha512-h5NolAUlTd0LcZBtdNwJv9OotL2BOi0jJEtTAZgMaOuF8GdMfgR4T2CkyCsCX1u2FlH03fuNP+e0Px2LgQ9MGQ==}
+
+  '@syncfusion/ej2-data@31.2.5':
+    resolution: {integrity: sha512-CZv8LluaYOZ6/kX+PqGYXpf/vDX5NuExyfHXE1gAcHdr7DHo/fcT/1Yq0lGRdKNQyyTT8wrnyt+ygechGpqqQA==}
+
+  '@syncfusion/ej2-dropdowns@31.2.5':
+    resolution: {integrity: sha512-Y8znSeh6DDVohV+O8Yd8D2C8HHB8C05w+2uYqRt1Var8Vo6z/oGODDd2O4iPsS9Bt3G9VYj5DISRQPe8Bwzqeg==}
+
+  '@syncfusion/ej2-icons@31.2.2':
+    resolution: {integrity: sha512-XXiaK9VR+6h8iI6BesBydO8j4zT63dk9plUi7KlyjVJnFUveDDNYOpvixU5aY6mJd1Buj9KkVUYBunM4rcZLBg==}
+
+  '@syncfusion/ej2-inputs@31.2.5':
+    resolution: {integrity: sha512-wB76bMB3fx4DdZbRJEQBP1VLrw4nLpAOi4ZpGZrLCAAi6ZxQmIasC8eH9FadeCc3gGL1GLRXZh+xi/QIKaOcrw==}
+
+  '@syncfusion/ej2-lists@31.2.2':
+    resolution: {integrity: sha512-/ynwm6vQTIOZcERMl3Qlhpw/TsmGypQneqdnD4lot67RphzF08BiVHmAdz7DfVOYBlWySlEK2+oGNDdLZNdzIw==}
+
+  '@syncfusion/ej2-navigations@31.2.5':
+    resolution: {integrity: sha512-nfi0pL2LV/vFrJFpuMjn3GTaKm/hV0mSoKcudH/hw8siLZmmbnfhRc6Ltryz7mr5RfpeLJSHSb/O0QBi2uT2MQ==}
+
+  '@syncfusion/ej2-notifications@31.2.2':
+    resolution: {integrity: sha512-ASbnWHyiFhlX7LXuI2ybl8tkClEWhzW4dQ6SekccbOWG6tRKmAIyVWylfdREyexb1gvHTj+XgHTcHt6SidPTfQ==}
+
+  '@syncfusion/ej2-popups@31.2.5':
+    resolution: {integrity: sha512-CrwdkBskbyAHfRKILTrIva/aPgC0XLltNiyrvwi/8mZRqgU9Fo6QogAx9xHeHKKPq2tpXh95v5OX0XTOoOyH6w==}
+
+  '@syncfusion/ej2-react-base@31.2.2':
+    resolution: {integrity: sha512-Y6z7JqXsYBiH+AkoLuTBhUwvg47I8rStpc7NoRKZgZgzpiKrniEdtS8o1GkPQA8f18ULXo6RZ0P4uSpjDy74DQ==}
+
+  '@syncfusion/ej2-react-dropdowns@31.2.5':
+    resolution: {integrity: sha512-yQqYeX9U9CRREJ7Rt9rDtocxwpNM5zzRU3EyNr0lpA4RAHMqCNW9tMlYsWP2RY24DNnssq1MEceBTLinHZwMpw==}
+
+  '@syncfusion/ej2-splitbuttons@31.2.2':
+    resolution: {integrity: sha512-R31Z+/74kgMjwNuTyWxoy+4IuWtTgP1nLOiZMjsxUKdjliMnlqE5SoDe/eosthYHp+TlvojNlZX8k3gVzIEKZQ==}
 
   '@tailwindcss/node@4.1.13':
     resolution: {integrity: sha512-eq3ouolC1oEFOAvOMOBAmfCIqZBJuvWvvYWh5h5iOYfe1HFC6+GZ6EIL0JdM3/niGRJmnrOc+8gl9/HGUaaptw==}
@@ -747,6 +790,79 @@ snapshots:
   '@swc/helpers@0.5.15':
     dependencies:
       tslib: 2.8.1
+
+  '@syncfusion/ej2-base@31.2.5':
+    dependencies:
+      '@syncfusion/ej2-icons': 31.2.2
+
+  '@syncfusion/ej2-buttons@31.2.3':
+    dependencies:
+      '@syncfusion/ej2-base': 31.2.5
+
+  '@syncfusion/ej2-data@31.2.5':
+    dependencies:
+      '@syncfusion/ej2-base': 31.2.5
+
+  '@syncfusion/ej2-dropdowns@31.2.5':
+    dependencies:
+      '@syncfusion/ej2-base': 31.2.5
+      '@syncfusion/ej2-data': 31.2.5
+      '@syncfusion/ej2-inputs': 31.2.5
+      '@syncfusion/ej2-lists': 31.2.2
+      '@syncfusion/ej2-navigations': 31.2.5
+      '@syncfusion/ej2-notifications': 31.2.2
+      '@syncfusion/ej2-popups': 31.2.5
+
+  '@syncfusion/ej2-icons@31.2.2': {}
+
+  '@syncfusion/ej2-inputs@31.2.5':
+    dependencies:
+      '@syncfusion/ej2-base': 31.2.5
+      '@syncfusion/ej2-buttons': 31.2.3
+      '@syncfusion/ej2-popups': 31.2.5
+      '@syncfusion/ej2-splitbuttons': 31.2.2
+
+  '@syncfusion/ej2-lists@31.2.2':
+    dependencies:
+      '@syncfusion/ej2-base': 31.2.5
+      '@syncfusion/ej2-buttons': 31.2.3
+      '@syncfusion/ej2-data': 31.2.5
+      '@syncfusion/ej2-popups': 31.2.5
+
+  '@syncfusion/ej2-navigations@31.2.5':
+    dependencies:
+      '@syncfusion/ej2-base': 31.2.5
+      '@syncfusion/ej2-buttons': 31.2.3
+      '@syncfusion/ej2-data': 31.2.5
+      '@syncfusion/ej2-inputs': 31.2.5
+      '@syncfusion/ej2-lists': 31.2.2
+      '@syncfusion/ej2-popups': 31.2.5
+
+  '@syncfusion/ej2-notifications@31.2.2':
+    dependencies:
+      '@syncfusion/ej2-base': 31.2.5
+      '@syncfusion/ej2-buttons': 31.2.3
+      '@syncfusion/ej2-popups': 31.2.5
+
+  '@syncfusion/ej2-popups@31.2.5':
+    dependencies:
+      '@syncfusion/ej2-base': 31.2.5
+      '@syncfusion/ej2-buttons': 31.2.3
+
+  '@syncfusion/ej2-react-base@31.2.2':
+    dependencies:
+      '@syncfusion/ej2-base': 31.2.5
+
+  '@syncfusion/ej2-react-dropdowns@31.2.5':
+    dependencies:
+      '@syncfusion/ej2-base': 31.2.5
+      '@syncfusion/ej2-dropdowns': 31.2.5
+      '@syncfusion/ej2-react-base': 31.2.2
+
+  '@syncfusion/ej2-splitbuttons@31.2.2':
+    dependencies:
+      '@syncfusion/ej2-base': 31.2.5
+      '@syncfusion/ej2-popups': 31.2.5
 
   '@tailwindcss/node@4.1.13':
     dependencies:
