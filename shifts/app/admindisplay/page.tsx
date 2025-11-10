@@ -3,7 +3,7 @@ import Loading from '@/app/ui/loading';
 import ShiftAdder from '@/app/ui/shiftadder';
 import ShiftEditor from '@/app/ui/shifteditor';
 import { Suspense } from 'react';
-import { fetchShiftsById, fetchAvailableShifts, addShift } from '@/app/lib/data'
+import { fetchShiftsById, getUser, fetchAvailableShifts, addShift, assignShift } from '@/app/lib/data'
 import { cookies } from 'next/headers';
 import { useRouter, redirect } from 'next/navigation';
 import styles from '../styles/Design.module.css';
@@ -17,6 +17,7 @@ export default async function Page() {
 
     const userId = (await cookies()).get('userId')?.value?? "";
     console.log(userId);
+    const user = await getUser(userId);
     const events = await fetchShiftsById(userId);
     const availableEvents = await fetchAvailableShifts();
     const availEventArray = Object.values(availableEvents);
@@ -46,6 +47,11 @@ export default async function Page() {
 
     async function handleEdit(formData: FormData) {
         'use server'
+        const chosenShiftId = formData.get('shiftselect') as string;
+        const userName = user.name;
+        console.log("Chosen ID is: " + chosenShiftId);
+        assignShift(chosenShiftId,userName,userId);
+        redirect('/admindisplay/');
     }
 
 

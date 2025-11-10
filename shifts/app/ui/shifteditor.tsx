@@ -13,18 +13,17 @@ export default function ShiftEditor({
     'use client' // I don't know if this one is necessary but it works
     const [date, setDate] = useState("");
     const availEvents = params;
-    console.log(availEvents);
+    //console.log(availEvents);     for checking that it is receiving
     let shiftData: { [key: string]: Object }[] = [];
-    let counter = 0;
     for(var i of availEvents) {
         let shiftid = i.id;
         let shiftname = i.start.slice(11);
-        shiftData[counter] = { Id: {shiftid}, Name: {shiftname}}
+        shiftData.push({ Id: shiftid, Name: shiftname});
     }
-    /* Needs to be done: maybe make shiftData a separate array, then put it all into 
-    an array for dataSource at once? Maybe use an if statement to see if it matches the
-    selected date? So, also need to work with date string and match it to the start
-    date for the shifts*/
+    
+    console.log(shiftData);
+    /* Needs to be done: NEEDS a filter by selected date for available shifts array
+    also NEEDS NEEDS NEEDS some CSS work on the dropdown list because it is ugly rn*/
     const fieldSettings: object = { text: 'Name', value: 'Id'};
 
     

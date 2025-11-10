@@ -81,6 +81,13 @@ export async function addShifts(shifts:Shift[]) {
     }
 }
 
+export async function assignShift(id:string,text:string,userid:string) {
+    const sql = 'UPDATE shifts SET text=?, userid=? WHERE id=?';
+    const values = [text,userid,id];
+
+    await conn.execute(sql,values);
+}
+
 export async function userLogin(username:string,password:string) : Promise<User> {
     const query = 'SELECT * from users WHERE username=? and password=?';
     const values = [username,password];
