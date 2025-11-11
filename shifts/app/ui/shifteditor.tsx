@@ -25,14 +25,12 @@ export default function ShiftEditor({
     let shiftData: { [key: string]: Object }[] = [];
     for(var i of dayAvailEvents) {
         let shiftid = i.id;
-        let shiftname = i.start.slice(11);
+        let shiftname = i.start.slice(11, 16);
+        
         shiftData.push({ Id: shiftid, Name: shiftname});
     }
     
     const fieldSettings: object = { text: 'Name', value: 'Id'};
-    /* 
-    NEEDS NEEDS NEEDS CSS ON THE DROPDOWN 
-    */
 
     
     if(date=="") {
@@ -50,7 +48,7 @@ export default function ShiftEditor({
                     fields={fieldSettings}
                     placeholder="Select a shift"
                 />
-                <p><button type="submit">Submit</button></p>
+                <p><button type="submit">Take Shift</button></p>
             </form>
         )
     }

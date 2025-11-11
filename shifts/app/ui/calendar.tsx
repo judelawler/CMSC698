@@ -23,7 +23,7 @@ export default function Calendar(eventlist: Shift[]) {
         eventMoveHandling: "Disabled",
         eventResizeHandling: "Disabled",
         eventDeleteHandling: "Disabled",
-        timeFormat: "Clock12Hours",
+        timeFormat: "Clock24Hours",
         heightSpec: "BusinessHours",
     };
 

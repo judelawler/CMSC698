@@ -8,7 +8,7 @@ export default function ShiftAdder({
             <p>Date: <input aria-label="Date" type="date" name="date"/></p>
             <p>Start Time: <input aria-label="Time" type="time" name="starttime"/></p>
             <p>End Time: <input aria-label="Time" type="time" name="endtime"/></p>
-            <p><button type="submit">Submit</button></p>
+            <p><button type="submit">Add Shift(s)</button></p>
         </form>
     )
 }
