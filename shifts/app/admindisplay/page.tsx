@@ -65,7 +65,6 @@ export default async function Page() {
             </Suspense>
             <div className={styles.editshiftdiv}>
                 <h3>Select Shifts</h3>
-                
                 <ShiftEditor adder={handleEdit} params={availEventArray}/>
             </div>
             <div className={styles.addshiftdiv}>

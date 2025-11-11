@@ -1,19 +1,29 @@
 import Calendar from '@/app/ui/calendar';
 import Loading from '@/app/ui/loading';
+import ShiftEditor from '@/app/ui/shifteditor';
 import { Suspense } from 'react';
-import {DayPilot} from '@daypilot/daypilot-lite-react';
-import { Shift, fetchShifts, fetchShiftsById, getUser, fetchAvailableShifts } from '@/app/lib/data'
-import Link from 'next/link';
+import { Shift, fetchShifts, fetchShiftsById, getUser, fetchAvailableShifts, assignShift } from '@/app/lib/data'
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 import styles from '../styles/Design.module.css';
 
 
 export default async function Page() {
     const userId = (await cookies()).get('userId')?.value?? "";
     console.log(userId);
+    const user = await getUser(userId);
     const events = await fetchShiftsById(userId);
     const availableEvents = await fetchAvailableShifts();
+    const availEventArray = Object.values(availableEvents);
     
+    async function handleEdit(formData: FormData) {
+        'use server'
+        const chosenShiftId = formData.get('shiftselect') as string;
+        const userName = user.name;
+        assignShift(chosenShiftId,userName,userId);
+        redirect('/calendardisplay/');
+    }
+
     return (
         <div>
             <Suspense fallback={<Loading/>}>
@@ -21,15 +31,9 @@ export default async function Page() {
                     {...events}
                 />
             </Suspense>
-            <div>
-                <div className={styles.choosedatediv}>
-                    <p>Test Text - Date Choice: </p>
-                    <input aria-label="Date" type="date" />
-                </div>
-                <div>
-                    <p>This time selector will only be on admin page.</p>
-                    <input aria-label="Time" type="time" />
-                </div>
+            <div className={styles.editshiftdiv}>
+                <h3>Select Shifts</h3>
+                <ShiftEditor adder={handleEdit} params={availEventArray}/>
             </div>
         </div>
     )
