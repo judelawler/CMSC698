@@ -49,7 +49,7 @@ export default function ShiftEditor({
                     dataSource={shiftData}
                     fields={fieldSettings}
                     placeholder="Select a shift"
-                    />
+                />
                 <p><button type="submit">Submit</button></p>
             </form>
         )

@@ -9,7 +9,6 @@ import { useRouter, redirect } from 'next/navigation';
 import styles from '../styles/Design.module.css';
 
 export default async function Page() {
-
     const times = [
         "08:00:00","09:00:00","10:30:00","12:00:00","13:30:00",
         "15:00:00","16:30:00","17:30:00","19:00:00","20:30:00","22:00:00"
@@ -21,8 +20,6 @@ export default async function Page() {
     const events = await fetchShiftsById(userId);
     const availableEvents = await fetchAvailableShifts();
     const availEventArray = Object.values(availableEvents);
-    
-    
 
     async function handleAdd(formData: FormData){
         'use server'
@@ -54,7 +51,6 @@ export default async function Page() {
         redirect('/admindisplay/');
     }
 
-
     return (
         <div>
             <h1>ADMIN PAGE</h1>
@@ -64,7 +60,7 @@ export default async function Page() {
                 />
             </Suspense>
             <div className={styles.editshiftdiv}>
-                <h3>Select Shifts</h3>
+                <h3>Assign Shifts</h3>
                 <ShiftEditor adder={handleEdit} params={availEventArray}/>
             </div>
             <div className={styles.addshiftdiv}>
