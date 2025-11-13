@@ -1,27 +1,64 @@
 
-
 .largerdiv {
     width: 100%;
     border: 1px;
     overflow: hidden;
 }
 
-.choosedatediv {
+.leftcontainerdiv {
     width: 50%;
-    padding: 20px;
-    float:left;
+    padding: 5px;
+    float: left;
+}
+
+.rightcontainerdiv {
+    width: 50%;
+    padding: 5px;
+    float:right;
 }
 
 .editshiftdiv {
-    width: 50%;
+    width: 100%;
     padding: 20px;
     float:left;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    height: 100%;
 }
 
 .addshiftdiv {
-    width: 50%;
+    width: 100%;
     padding: 20px;
-    float:right;
+    float:left;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.removeshiftdiv {
+    width: 100%;
+    padding: 20px;
+    float: left;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    height: 100%
+}
+
+.deleteshiftdiv {
+    width: 100%;
+    padding: 20px;
+    float: left;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.optionsContainerDiv {
+    height: auto;
 }
 
 .calendardiv {
@@ -53,4 +90,11 @@
     align-items: center;
     text-align: center;
     min-height: 100vh;
+}
+
+.box {
+  background-color: inherit;
+  padding: 1px;
+  margin-bottom: 1px; 
+  color: white;
 }

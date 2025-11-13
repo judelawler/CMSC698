@@ -2,8 +2,10 @@ import Calendar from '@/app/ui/calendar';
 import Loading from '@/app/ui/loading';
 import ShiftAdder from '@/app/ui/shiftadder';
 import ShiftEditor from '@/app/ui/shifteditor';
+import ShiftRemover from '@/app/ui/shiftremover';
+import ShiftDeleter from '@/app/ui/shiftdeleter';
 import { Suspense } from 'react';
-import { fetchShiftsById, getUser, fetchAvailableShifts, addShift, assignShift } from '@/app/lib/data'
+import { fetchShiftsById, getUser, fetchAvailableShifts, addShift, assignShift, deleteShift } from '@/app/lib/data'
 import { cookies } from 'next/headers';
 import { useRouter, redirect } from 'next/navigation';
 import styles from '../styles/Design.module.css';
@@ -20,6 +22,13 @@ export default async function Page() {
     const events = await fetchShiftsById(userId);
     const availableEvents = await fetchAvailableShifts();
     const availEventArray = Object.values(availableEvents);
+    const eventsArray = Object.values(events);
+    let usersEvents=[];
+    for(var i of eventsArray){
+        if(i.userid == userId){
+            usersEvents.push(i);
+        }
+    }
 
     async function handleAdd(formData: FormData){
         'use server'
@@ -51,6 +60,20 @@ export default async function Page() {
         redirect('/admindisplay/');
     }
 
+    async function handleRemove(formData: FormData) {
+        'use server'
+        const chosenShiftId = formData.get('shiftselect') as string;
+        assignShift(chosenShiftId,"UNASSIGNED","null");
+        redirect('/admindisplay/');
+    }
+
+    async function handleDelete(formData: FormData) {
+        'use server'
+        const chosenShiftId = formData.get('shiftselect') as string;
+        deleteShift(chosenShiftId);
+        redirect('/admindisplay/');
+    }
+
     return (
         <div>
             <h1>ADMIN PAGE</h1>
@@ -59,16 +82,38 @@ export default async function Page() {
                     {...events}
                 />
             </Suspense>
-            <div className={styles.editshiftdiv}>
-                <h3>Assign Shifts</h3>
-                <p>Select a date, then choose from the available shifts. </p>
-                <ShiftEditor adder={handleEdit} params={availEventArray}/>
+
+            <div className={styles.leftcontainerdiv}>
+                <div className={styles.editshiftdiv}>
+                    <h3>Assign Shifts</h3>
+                    <p>Select a date, then choose from the available shifts. </p>
+                    <ShiftEditor adder={handleEdit} params={availEventArray}/>
+                </div>
+                
+                <div className={styles.box}> Editing Shifts </div>
+
+                <div className={styles.removeshiftdiv}>
+                    <h3>Unassign Shifts</h3>
+                    <p>Select a date, then choose one of your shifts to unassign. </p>
+                    <ShiftRemover adder={handleRemove} params={usersEvents} />
+                </div>
             </div>
-            <div className={styles.addshiftdiv}>
-                <h3>Add Shifts</h3>
-                <p>Leave both times blank to fill a day with shifts automatically.</p>
-                <br></br>
-                <ShiftAdder adder={handleAdd}/>
+
+            <div className={styles.rightcontainerdiv}>
+                <div className={styles.addshiftdiv}>
+                    <h3>Add Shifts</h3>
+                    <p>Leave both times blank to fill a day with shifts automatically.</p>
+                    <br></br>
+                    <ShiftAdder adder={handleAdd}/>
+                </div>
+
+                <div className={styles.box}> Adding / Removing Shifts </div>
+
+                <div className={styles.deleteshiftdiv}>
+                    <h3>Delete Shifts</h3>
+                    <p>Text</p>
+                    <ShiftDeleter adder={handleDelete} params={eventsArray}/>
+                </div>
             </div>
         </div>
     )

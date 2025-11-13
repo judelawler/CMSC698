@@ -82,9 +82,20 @@ export async function addShifts(shifts:Shift[]) {
 }
 
 export async function assignShift(id:string,text:string,userid:string) {
-    const sql = 'UPDATE shifts SET text=?, userid=? WHERE id=?';
-    const values = [text,userid,id];
+    if(userid=="null"){
+        const sql = 'UPDATE shifts SET text=?, userid=null WHERE id=?';
+        const values = [text,id];
+        await conn.execute(sql,values);
+    } else{
+        const sql = 'UPDATE shifts SET text=?, userid=? WHERE id=?';
+        const values = [text,userid,id];
+        await conn.execute(sql,values);
+    }
+}
 
+export async function deleteShift(id:string) {
+    const sql = 'DELETE FROM shifts WHERE id=?';
+    const values=[id];
     await conn.execute(sql,values);
 }
 
