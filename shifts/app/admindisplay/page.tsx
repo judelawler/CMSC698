@@ -56,13 +56,15 @@ export default async function Page() {
 
     async function handleEdit(formData: FormData) {
         'use server'
-        const chosenShiftId = formData.get('shiftselect') as string;
+        const chosenShiftId = formData.getAll('shiftselect') as string[];
         const chosenUserId = formData.get('userselect') as string;
         const chosenUser = await getUser(chosenUserId);
         const chosenUserName = chosenUser.name;
-        console.log("Chosen ID is: " + chosenShiftId);
-        assignShift(chosenShiftId,chosenUserName,chosenUserId);
-        redirect('/admindisplay/');
+        //console.log("Chosen ID is: " + chosenShiftId[0]); for testing the multi-list
+        for(var x of chosenShiftId){
+            assignShift(x,chosenUserName,chosenUserId);
+        }
+        redirect('/admindisplay');
     }
 
     async function handleRemove(formData: FormData) {

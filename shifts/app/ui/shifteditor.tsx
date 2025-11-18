@@ -1,6 +1,6 @@
 'use client'
 import { useState, use } from 'react';
-import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
+import { DropDownListComponent, MultiSelectComponent } from '@syncfusion/ej2-react-dropdowns';
 import { Shift, User } from '@/app/lib/data'
 
 export default function ShiftEditor({
@@ -62,7 +62,7 @@ export default function ShiftEditor({
                     placeholder="Select a user"
                 />
                 <br></br>
-                <DropDownListComponent 
+                <MultiSelectComponent 
                     id="shiftselect"
                     dataSource={shiftData}
                     fields={fieldSettings}
