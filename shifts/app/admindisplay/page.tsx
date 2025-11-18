@@ -4,8 +4,9 @@ import ShiftAdder from '@/app/ui/shiftadder';
 import ShiftEditor from '@/app/ui/shifteditor';
 import ShiftRemover from '@/app/ui/shiftremover';
 import ShiftDeleter from '@/app/ui/shiftdeleter';
+import AddUserButton from '@/app/ui/adduserbutton';
 import { Suspense } from 'react';
-import { fetchShiftsById, getUser, fetchAvailableShifts, addShift, assignShift, deleteShift } from '@/app/lib/data'
+import { fetchShiftsById, getUser, fetchAvailableShifts, addShift, assignShift, deleteShift, getAllUsers } from '@/app/lib/data'
 import { cookies } from 'next/headers';
 import { useRouter, redirect } from 'next/navigation';
 import styles from '../styles/Design.module.css';
@@ -20,13 +21,15 @@ export default async function Page() {
     console.log(userId);
     const user = await getUser(userId);
     const events = await fetchShiftsById(userId);
+    const users = await getAllUsers();
     const availableEvents = await fetchAvailableShifts();
     const availEventArray = Object.values(availableEvents);
     const eventsArray = Object.values(events);
-    let usersEvents=[];
+    const usersArray = Object.values(users);
+    let assignedEvents=[];
     for(var i of eventsArray){
-        if(i.userid == userId){
-            usersEvents.push(i);
+        if(i.userid != null){
+            assignedEvents.push(i);
         }
     }
 
@@ -54,9 +57,11 @@ export default async function Page() {
     async function handleEdit(formData: FormData) {
         'use server'
         const chosenShiftId = formData.get('shiftselect') as string;
-        const userName = user.name;
+        const chosenUserId = formData.get('userselect') as string;
+        const chosenUser = await getUser(chosenUserId);
+        const chosenUserName = chosenUser.name;
         console.log("Chosen ID is: " + chosenShiftId);
-        assignShift(chosenShiftId,userName,userId);
+        assignShift(chosenShiftId,chosenUserName,chosenUserId);
         redirect('/admindisplay/');
     }
 
@@ -76,7 +81,7 @@ export default async function Page() {
 
     return (
         <div>
-            <h1>ADMIN PAGE</h1>
+            <h1 className={styles.center}>Shift Calendar Admin Page</h1>
             <Suspense fallback={<Loading/>}>
                 <Calendar 
                     {...events}
@@ -87,23 +92,28 @@ export default async function Page() {
                 <div className={styles.editshiftdiv}>
                     <h3>Assign Shifts</h3>
                     <p>Select a date, then choose from the available shifts. </p>
-                    <ShiftEditor adder={handleEdit} params={availEventArray}/>
+                    <br></br>
+                    <ShiftEditor adder={handleEdit} params={availEventArray} users={usersArray} isadmin={true}/>
                 </div>
                 
                 <div className={styles.box}> Editing Shifts </div>
 
                 <div className={styles.removeshiftdiv}>
                     <h3>Unassign Shifts</h3>
-                    <p>Select a date, then choose one of your shifts to unassign. </p>
-                    <ShiftRemover adder={handleRemove} params={usersEvents} />
+                    <p>Select a date, then choose one of the shifts to unassign. </p>
+                    <br></br>
+                    <ShiftRemover adder={handleRemove} params={assignedEvents} />
                 </div>
+
+                <div className={styles.box}> Add User </div>
+
+                <AddUserButton/>
             </div>
 
             <div className={styles.rightcontainerdiv}>
                 <div className={styles.addshiftdiv}>
                     <h3>Add Shifts</h3>
                     <p>Leave both times blank to fill a day with shifts automatically.</p>
-                    <br></br>
                     <ShiftAdder adder={handleAdd}/>
                 </div>
 
@@ -111,7 +121,7 @@ export default async function Page() {
 
                 <div className={styles.deleteshiftdiv}>
                     <h3>Delete Shifts</h3>
-                    <p>Text</p>
+                    <p>Choose a shift to delete. </p>
                     <ShiftDeleter adder={handleDelete} params={eventsArray}/>
                 </div>
             </div>

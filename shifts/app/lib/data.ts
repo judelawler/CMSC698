@@ -1,6 +1,6 @@
 import mysql, { ConnectionOptions, RowDataPacket } from 'mysql2/promise';
 import { DayPilot } from '@daypilot/daypilot-lite-react';
-
+import { v4 as uuidv4 } from 'uuid';
 
 
 const access: ConnectionOptions = {
@@ -118,3 +118,15 @@ export async function getUser(idusers: string) : Promise<User> {
     return users[0];
 }
 
+export async function addUser(username:string,password:string,name:string,email:string,isadmin:any) {
+    const idusers = uuidv4();
+    const sql = 'INSERT INTO users(idusers, username, password, name, email, isadmin) VALUES (?,?,?,?,?,?)';
+    const values = [idusers,username,password,name,email,isadmin];
+    await conn.execute(sql,values);
+}
+
+export async function getAllUsers() : Promise<User[]> {
+    const query = 'SELECT * from users';
+    const [users] = await conn.query<User[]>(query);
+    return users;
+}

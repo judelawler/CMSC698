@@ -1,18 +1,23 @@
 'use client'
 import { useState, use } from 'react';
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
-import { Shift } from '@/app/lib/data'
+import { Shift, User } from '@/app/lib/data'
 
 export default function ShiftEditor({
     adder,
-    params
+    params,
+    users,
+    isadmin
 }: {
     adder : (data:FormData) => void,
     params: Shift[],
+    users: User[],
+    isadmin: boolean
 }) {
     'use client' 
     const [date, setDate] = useState("");
     const availEvents = params;
+    const allUsers = users;
     let dayAvailEvents=[];
     for(var i of availEvents) {
         const startDateCheck = i.start.slice(0, 10);
@@ -29,8 +34,16 @@ export default function ShiftEditor({
         
         shiftData.push({ Id: shiftid, Name: shiftname});
     }
-    
     const fieldSettings: object = { text: 'Name', value: 'Id'};
+
+    let userData: { [key: string]: Object }[] = [];
+    for(var thing of users) {
+        let userid = thing.idusers;
+        let name = thing.name;
+
+        userData.push({ Id: userid, Name: name});
+    }
+    const userFieldSettings: object = { text: 'Name', value: 'Id'};
 
     
     if(date=="") {
@@ -38,6 +51,25 @@ export default function ShiftEditor({
             <div>
                 <input aria-label="Date" type="date" value={date} onChange={(e) => setDate(e.target.value)}/>
             </div>
+        )
+    } else if(isadmin) {
+        return(
+            <form action={adder}>
+                <DropDownListComponent 
+                    id="userselect"
+                    dataSource={userData}
+                    fields={userFieldSettings}
+                    placeholder="Select a user"
+                />
+                <br></br>
+                <DropDownListComponent 
+                    id="shiftselect"
+                    dataSource={shiftData}
+                    fields={fieldSettings}
+                    placeholder="Select a shift"
+                />
+                <p><button type="submit">Assign Shift</button></p>
+            </form>
         )
     } else{
         return(

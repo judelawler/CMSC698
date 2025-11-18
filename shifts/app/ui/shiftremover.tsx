@@ -8,7 +8,7 @@ export default function ShiftRemover({
     params
 }: {
     adder : (data:FormData) => void,
-    params: Shift[],
+    params: Shift[]
 }) {
     'use client'
     const [date, setDate] = useState("");
