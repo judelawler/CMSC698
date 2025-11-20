@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react';
-import { DropDownListComponent, MultiSelectComponent } from '@syncfusion/ej2-react-dropdowns';
+import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import { Shift } from '@/app/lib/data';
 
 export default function ShiftRemover({

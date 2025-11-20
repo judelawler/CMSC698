@@ -8,7 +8,7 @@ import AddUserButton from '@/app/ui/adduserbutton';
 import { Suspense } from 'react';
 import { fetchShiftsById, getUser, fetchAvailableShifts, addShift, assignShift, deleteShift, getAllUsers } from '@/app/lib/data'
 import { cookies } from 'next/headers';
-import { useRouter, redirect } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import styles from '../styles/Design.module.css';
 
 export default async function Page() {

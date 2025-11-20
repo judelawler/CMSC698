@@ -3,7 +3,6 @@
 import React, { useEffect, useState} from "react";
 import {DayPilot, DayPilotCalendar, DayPilotNavigator} from "@daypilot/daypilot-lite-react";
 import { Shift, fetchShifts, addShifts } from '@/app/lib/data'
-import { redirect } from 'next/navigation';
 import "./calendar.css"
 import styles from '../styles/Design.module.css';
 

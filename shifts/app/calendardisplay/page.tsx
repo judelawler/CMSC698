@@ -3,7 +3,7 @@ import Loading from '@/app/ui/loading';
 import ShiftEditor from '@/app/ui/shifteditor';
 import ShiftRemover from '@/app/ui/shiftremover';
 import { Suspense } from 'react';
-import { Shift, fetchShifts, fetchShiftsById, getUser, fetchAvailableShifts, assignShift } from '@/app/lib/data'
+import { Shift, fetchShiftsById, getUser, fetchAvailableShifts, assignShift } from '@/app/lib/data'
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import styles from '../styles/Design.module.css';

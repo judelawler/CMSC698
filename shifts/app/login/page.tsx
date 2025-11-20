@@ -1,6 +1,6 @@
 import Login from '@/app/ui/login';
 import { redirect } from 'next/navigation';
-import { User, userLogin } from '@/app/lib/data';
+import { userLogin } from '@/app/lib/data';
 import { cookies } from 'next/headers';
 import styles from '../styles/Design.module.css';
 

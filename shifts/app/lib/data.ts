@@ -1,5 +1,4 @@
 import mysql, { ConnectionOptions, RowDataPacket } from 'mysql2/promise';
-import { DayPilot } from '@daypilot/daypilot-lite-react';
 import { v4 as uuidv4 } from 'uuid';
 
 
