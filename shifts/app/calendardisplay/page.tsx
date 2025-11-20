@@ -2,6 +2,7 @@ import Calendar from '@/app/ui/calendar';
 import Loading from '@/app/ui/loading';
 import ShiftEditor from '@/app/ui/shifteditor';
 import ShiftRemover from '@/app/ui/shiftremover';
+import LogOutButton from '@/app/ui/logoutbutton';
 import { Suspense } from 'react';
 import { Shift, fetchShiftsById, getUser, fetchAvailableShifts, assignShift } from '@/app/lib/data'
 import { cookies } from 'next/headers';
@@ -55,6 +56,9 @@ export default async function Page() {
                     <br></br>
                     <ShiftEditor adder={handleEdit} params={availEventArray} users={usersArray} isadmin={false}/>
                 </div>
+                                <div className={styles.box}> Log Out </div>
+
+                <LogOutButton/>
             </div>
             <div className={styles.rightcontainerdiv}>
                 <div className={styles.removeshiftdiv}>

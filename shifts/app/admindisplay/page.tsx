@@ -5,6 +5,7 @@ import ShiftEditor from '@/app/ui/shifteditor';
 import ShiftRemover from '@/app/ui/shiftremover';
 import ShiftDeleter from '@/app/ui/shiftdeleter';
 import AddUserButton from '@/app/ui/adduserbutton';
+import LogOutButton from '@/app/ui/logoutbutton';
 import { Suspense } from 'react';
 import { fetchShiftsById, getUser, fetchAvailableShifts, addShift, assignShift, deleteShift, getAllUsers } from '@/app/lib/data'
 import { cookies } from 'next/headers';
@@ -110,6 +111,10 @@ export default async function Page() {
                 <div className={styles.box}> Add User </div>
 
                 <AddUserButton/>
+
+                <div className={styles.box}> Log Out </div>
+
+                <LogOutButton/>
             </div>
 
             <div className={styles.rightcontainerdiv}>
