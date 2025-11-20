@@ -1,3 +1,5 @@
 # Senior Experience Project
-## Jude Lawler
 
+Done by Jude Lawler for CMSC698
+
+## Shift Calendar
