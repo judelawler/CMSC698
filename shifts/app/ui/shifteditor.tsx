@@ -20,17 +20,17 @@ export default function ShiftEditor({
     const allUsers = users;
     let dayAvailEvents=[];
     for(var i of availEvents) {
-        const startDateCheck = i.start.slice(0, 10);
+        const startDateCheck = i.start.toISOString().slice(0, 10);
         let dateCompare = startDateCheck.localeCompare(date);
         if(dateCompare == 0){
             dayAvailEvents.push(i);
         }
     }
-
+    //console.log(dayAvailEvents);
     let shiftData: { [key: string]: Object }[] = [];
     for(var i of dayAvailEvents) {
         let shiftid = i.id;
-        let shiftname = i.start.slice(11, 16);
+        let shiftname = i.start.toISOString().slice(11, 16);
         
         shiftData.push({ Id: shiftid, Name: shiftname});
     }

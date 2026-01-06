@@ -35,6 +35,10 @@ const conn = await mysql.createConnection(access);
 export async function fetchShifts() : Promise<Shift[]> {
     const query = 'SELECT * from shifts;';
     const [shifts] = await conn.query<Shift[]>(query);
+    for(const thing of shifts) {
+        thing.start.setTime(thing.start.getTime() - (6*60*60*1000));
+        thing.end.setTime(thing.end.getTime() - (6*60*60*1000));
+    }
     return shifts;
 }
 
@@ -48,13 +52,21 @@ export async function fetchShiftsById(userid:string) : Promise<Shift[]> {
         } if(thing.userid == null){
             thing.tags = 0;
         }
+        thing.start.setTime(thing.start.getTime() - (6*60*60*1000));
+        thing.end.setTime(thing.end.getTime() - (6*60*60*1000));
     }
+    //console.log(shifts);
+
     return shifts;
 }
 
 export async function fetchAvailableShifts() : Promise<Shift[]> {
     const query = 'SELECT * from shifts WHERE userid IS NULL';
     const [shifts] = await conn.query<Shift[]>(query);
+    for(const thing of shifts) {
+        thing.start.setTime(thing.start.getTime() - (6*60*60*1000));
+        thing.end.setTime(thing.end.getTime() - (6*60*60*1000));
+    }
     return shifts;
 }
 
@@ -64,6 +76,8 @@ export async function fetchShift(id : string) : Promise<Shift> {
     const [shifts] = await conn.query<Shift[]>(query,values);
     if(shifts.length == 0)
         throw Error("Invalid shift id.");
+    shifts[0].start.setTime(shifts[0].start.getTime() - (6*60*60*1000));
+    shifts[0].end.setTime(shifts[0].end.getTime() - (6*60*60*1000));
     return shifts[0];
 }
 

@@ -15,7 +15,7 @@ export default function ShiftRemover({
     const userEvents = params;
     let dayUserEvents=[];
     for(var i of userEvents) {
-        const startDateCheck = i.start.slice(0, 10);
+        const startDateCheck = i.start.toISOString().slice(0, 10);
         let dateCompare = startDateCheck.localeCompare(date);
         if(dateCompare == 0){
             dayUserEvents.push(i);
@@ -25,7 +25,7 @@ export default function ShiftRemover({
     let shiftData: { [key: string]: Object }[] = [];
     for(var i of dayUserEvents) {
         let shiftid = i.id;
-        let shiftname = i.start.slice(11, 16);
+        let shiftname = i.start.toISOString().slice(11, 16);
         shiftData.push({ Id: shiftid, Name: shiftname});
     }
     const fieldSettings: object = { text: 'Name', value: 'Id'};

@@ -26,6 +26,7 @@ export default async function Page() {
     const availableEvents = await fetchAvailableShifts();
     const availEventArray = Object.values(availableEvents);
     const eventsArray = Object.values(events);
+    //console.log(eventsArray);
     const usersArray = Object.values(users);
     let assignedEvents=[];
     for(var i of eventsArray){

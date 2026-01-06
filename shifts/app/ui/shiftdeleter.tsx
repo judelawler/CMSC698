@@ -15,7 +15,7 @@ export default function ShiftDeleter({
     const events = params;
     let dayEvents=[];
     for(var i of events) {
-        const startDateCheck = i.start.slice(0, 10);
+        const startDateCheck = i.start.toISOString().slice(0, 10);
         let dateCompare = startDateCheck.localeCompare(date);
         if(dateCompare == 0) {
             dayEvents.push(i);
@@ -25,7 +25,7 @@ export default function ShiftDeleter({
     let shiftData: { [key: string]: Object }[] = [];
     for(var i of dayEvents) {
         let shiftid = i.id;
-        let shiftname = i.start.slice(11, 16);
+        let shiftname = i.start.toISOString().slice(11, 16);
         shiftData.push({ Id: shiftid, Name: shiftname });
     }
     const fieldSettings: object = { text: 'Name', value: 'Id' };

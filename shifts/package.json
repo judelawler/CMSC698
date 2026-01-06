@@ -11,6 +11,7 @@
     "@daypilot/daypilot-lite-react": "^4.6.1",
     "@syncfusion/ej2-react-dropdowns": "^31.2.5",
     "bootstrap": "^5.3.8",
+    "mysql2-promise": "^0.1.4",
     "next": "15.5.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",
