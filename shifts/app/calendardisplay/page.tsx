@@ -43,7 +43,7 @@ export default async function Page() {
 
     return (
         <div>
-            <h1 className={styles.center}>Shift Calendar</h1>
+            <h1 className={styles.center}>Shift Planner</h1>
             <Suspense fallback={<Loading/>}>
                 <Calendar 
                     {...events}

@@ -22,7 +22,7 @@ export default async function Page() {
 
     return (
         <div>
-            <h1 className={styles.center}>Log In to Shift Calendar</h1>
+            <h1 className={styles.center}>Shift Planner Login</h1>
             <div className={styles.centereddiv}>
                 <Login adder={handleLogin} />
             </div>
